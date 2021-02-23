@@ -1,6 +1,6 @@
 #modify only where asked to and leave everything else the same. Unless you want to learn more about compiling c programs and make.
 CC=gcc
-CFLAGS=-I -Wall.
+CFLAGS=-Wall
 
 # HERE modify DEPS to contain all header files you have created
 #e.g. if you created 2 header files, node.h and linked_list.h then you should have "DEPS = node.h linked_list.h"
@@ -12,13 +12,23 @@ OBJ =
 
 #You do not have to modify this
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o: $(DEPS)
-	$(CC) -c -o main.o main.c
+	$(CC) $(CFLAGS) -c -o main.o main.c 
 	
 all: $(OBJ) main.o
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^
 	
 clean: all
 	rm main.o $(OBJ)
+	
+test-warnings: CFLAGS=-Wall -Werror
+test-warnings: all
+
+test-leaks: CFLAGS=-ggdb3
+test-leaks: all
+	valgrind --leak-check=full --error-exitcode=1 ./all
+	
+test-cpp-checks: $(wildcard *.c)
+	cppcheck --enable=all --inline-suppr --error-exitcode=1 --suppress=missingIncludeSystem $^
