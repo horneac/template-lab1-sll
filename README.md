@@ -30,6 +30,6 @@ Instructions list:
 *	DE ‘x’ = attempt to delete element ‘x’ from the list – does nothing if no such element
 *	PRINT_ALL = print (append) the whole contents of the list to the file “output.dat”
 *	PRINT_F ‘x’ = print (append) the first ‘x’ values of the list to the file “output.dat”
-  -	If x > number of elements in the list, all elements are printed
+    -	If x > number of elements in the list, all elements are printed
 *	PRINT_L ‘x’ = print (append) the last ‘x’ values of the list to the file “output.dat” 
-  -	If x > number of elements in the list, all elements are printed	
+    - If x > number of elements in the list, all elements are printed	
